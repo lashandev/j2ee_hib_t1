@@ -18,8 +18,8 @@
     <body>
 
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
 
                 <div class="form-group">
                     <label>Department ID</label>
@@ -39,11 +39,32 @@
                 <br>
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" onclick="saveData()">Save New Department</button>
-                    <button class="btn btn-warning btn-block" onclick="search()">Search</button>
+                    <button class="btn btn-success btn-block" onclick="search()">Search</button>
                 </div>
 
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
+                            <table class="table table-striped table-primary" id="mytable">
+                                <tr>
+                                    <th>Department ID</th>
+                                    <th>Department Name</th>
+                                    <th>Department Status</th>
+                                    <th>Update Action</th>
+                                    <th>Delete Action</th>
+                                </tr>
+                                <tbody id="tabledata"></tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
 
 
@@ -72,25 +93,12 @@
 
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <table class="table table-striped table-primary" id="mytable">
-                        <tr>
-                            <th>Department ID</th>
-                            <th>Department Name</th>
-                            <th>Department Status</th>
-                        </tr>
-                        <tbody id="tabledata"></tbody>
-                    </table>
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
 
-        </div>
     </body>
     <script>
+        $(document).ready(function (){
+            search();
+        });
         function saveData() {
             var depid = document.getElementById('depid').value;
             var depname = document.getElementById('depname').value;
@@ -113,7 +121,7 @@
                 console.log(this.responseText);
                 document.getElementById("tabledata").innerHTML = this.responseText;
             }
-            xhttp.open("POST","DepartmentSearchData");
+            xhttp.open("POST", "DepartmentSearchData");
             xhttp.send();
         }
     </script>

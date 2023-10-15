@@ -8,20 +8,18 @@ package controller.department;
 import dao.DepartmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Department;
 
 /**
  *
  * @author Lashan
  */
-@WebServlet(name = "DepartmentSearchData", urlPatterns = {"/DepartmentSearchData"})
-public class DepartmentSearchData extends HttpServlet {
+@WebServlet(name = "DepartmentDelete", urlPatterns = {"/DepartmentDelete"})
+public class DepartmentDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +35,11 @@ public class DepartmentSearchData extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String code = request.getParameter("code");
             DepartmentDAO departmentDAO = new DepartmentDAO();
-            List<Department> search = departmentDAO.search();
+            departmentDAO.delete(code);            
+            response.sendRedirect("Department.jsp");
             
-            String content = "";
-            for (Department department : search) {
-                content += "<tr>";
-                content += "<td>"+department.getCode()+"</td>";
-                content += "<td>"+department.getName()+"</td>";
-                content += "<td>"+department.getIsactive()+"</td>";
-                content += "<td><button class='btn btn-warning'>Update Data</button></td>";
-                content += "<td><button class='btn btn-success'><a href='DepartmentDelete?code="
-                        +department.getCode()+"'>Delete Data</a></button></td>";
-                content += "</tr>";
-            }
-            out.print(content);
         }
     }
 
