@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2023 2:51:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Employee" table="employee" catalog="j2eeb1" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="employeeno" type="string">
+            <column name="employeeno" length="16" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="100" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="100" />
+        </property>
+        <property name="mobileno" type="string">
+            <column name="mobileno" length="15" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="createduser" type="string">
+            <column name="createduser" length="100" />
+        </property>
+        <property name="createddatetime" type="timestamp">
+            <column name="createddatetime" length="19" />
+        </property>
+        <property name="lastupdateuser" type="string">
+            <column name="lastupdateuser" length="100" />
+        </property>
+        <property name="lastupdatedatetime" type="timestamp">
+            <column name="lastupdatedatetime" length="19" />
+        </property>
+        <set name="logins" table="login" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="employee" />
+            </key>
+            <one-to-many class="model.Login" />
+        </set>
+    </class>
+</hibernate-mapping>

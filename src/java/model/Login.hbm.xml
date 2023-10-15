@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 8, 2023 2:51:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Login" table="login" catalog="j2eeb1" optimistic-lock="version">
+        <id name="username" type="string">
+            <column name="username" length="100" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employee" class="model.Employee" fetch="select">
+            <column name="employee" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" />
+        </property>
+        <property name="isactive" type="java.lang.Boolean">
+            <column name="isactive" />
+        </property>
+    </class>
+</hibernate-mapping>
