@@ -124,5 +124,6 @@
             xhttp.open("POST", "DepartmentSearchData");
             xhttp.send();
         }
+        
     </script>
 </html>

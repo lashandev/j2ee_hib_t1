@@ -17,19 +17,24 @@ import org.hibernate.criterion.Restrictions;
  * @author Lashan
  */
 public class EmployeeDAO {
-    
-    public List<Employee> search(){
-        List<Employee> employees = null;
+
+    public List<Employee> search() {
         Session session = ConnectionBuilder.hibSession();
         Criteria criteria = session.createCriteria(Employee.class);
-        criteria.add(Restrictions.eq("lastname", "Perera"));
         List<Employee> list = criteria.list();
-        
-        for (Employee employee : list) {
-            System.out.println(employee.toString());
-        }
-        
-        return employees;
+
+        return list;
     }
-    
+
+    public Employee search(int id) {
+        Employee employee = null;
+        Session session = ConnectionBuilder.hibSession();
+        Criteria criteria = session.createCriteria(Employee.class);
+        criteria.add(Restrictions.eq("id", id));
+        if (criteria.uniqueResult() != null) {
+            employee = (Employee) criteria.uniqueResult();
+        }
+        return employee;
+    }
+
 }
