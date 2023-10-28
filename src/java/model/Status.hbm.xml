@@ -3,16 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Oct 28, 2023 11:27:24 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="model.Department" table="department" catalog="j2eeb1" optimistic-lock="version">
+    <class name="model.Status" table="status" catalog="j2eeb1" optimistic-lock="version">
         <id name="code" type="string">
             <column name="code" length="16" />
             <generator class="assigned" />
         </id>
-        <property name="name" type="string">
-            <column name="name" />
-        </property>
-        <property name="isactive" type="java.lang.Boolean">
-            <column name="isactive" />
+        <property name="description" type="string">
+            <column name="description" length="100" />
         </property>
     </class>
 </hibernate-mapping>

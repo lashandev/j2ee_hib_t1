@@ -48,6 +48,7 @@ Contributor(s):
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <mapping resource="model/Login.hbm.xml"/>
     <mapping resource="model/Department.hbm.xml"/>
+    <mapping resource="model/Status.hbm.xml"/>
     <mapping resource="model/Employee.hbm.xml"/>
     <mapping resource="model/Item.hbm.xml"/>
   </session-factory>
