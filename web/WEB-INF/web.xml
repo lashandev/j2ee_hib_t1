@@ -20,4 +20,14 @@
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config>
     </servlet>
+    <servlet>
+        <servlet-name>ItemUpload</servlet-name>
+        <servlet-class>controller.item.ItemUpload</servlet-class>
+        <multipart-config>
+            <location>/temp</location>
+            <max-file-size>2097152</max-file-size>
+            <max-request-size>4194304</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
 </web-app>

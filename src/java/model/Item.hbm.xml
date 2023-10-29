@@ -17,5 +17,8 @@
         <property name="isactive" type="java.lang.Boolean">
             <column name="isactive" />
         </property>
+        <property name="sortkey" type="java.lang.Integer">
+            <column name="sortkey" />
+        </property>
     </class>
 </hibernate-mapping>

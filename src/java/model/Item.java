@@ -21,6 +21,7 @@ public class Item  implements java.io.Serializable {
      private String name;
      private String imgurl;
      private Boolean isactive;
+     private int sortkey;
 
     public Item() {
     }
@@ -76,6 +77,15 @@ public class Item  implements java.io.Serializable {
     
     public void setIsactive(Boolean isactive) {
         this.isactive = isactive;
+    }
+
+    @Column(name="sortkey")
+    public int getSortkey() {
+        return sortkey;
+    }
+
+    public void setSortkey(int sortkey) {
+        this.sortkey = sortkey;
     }
 
 
