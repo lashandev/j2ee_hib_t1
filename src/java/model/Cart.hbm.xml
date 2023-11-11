@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 11, 2023 12:17:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Cart" table="cart" catalog="j2eeb1" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cartstatus" class="model.Cartstatus" fetch="select">
+            <column name="cartstatus" not-null="true" />
+        </many-to-one>
+        <many-to-one name="employee" class="model.Employee" fetch="select">
+            <column name="employee" not-null="true" />
+        </many-to-one>
+        <property name="date" type="timestamp">
+            <column name="date" length="19" />
+        </property>
+        <property name="total" type="java.lang.Double">
+            <column name="total" precision="22" scale="0" />
+        </property>
+        <property name="isActive" type="java.lang.Boolean">
+            <column name="isActive" />
+        </property>
+        <property name="createduser" type="string">
+            <column name="createduser" length="100" />
+        </property>
+        <property name="createdatetime" type="timestamp">
+            <column name="createdatetime" length="19" />
+        </property>
+        <property name="lastupdateuser" type="string">
+            <column name="lastupdateuser" length="100" />
+        </property>
+        <property name="lastupdatedatetime" type="timestamp">
+            <column name="lastupdatedatetime" length="19" />
+        </property>
+        <set name="cartitems" table="cartitem" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cart" not-null="true" />
+            </key>
+            <one-to-many class="model.Cartitem" />
+        </set>
+    </class>
+</hibernate-mapping>

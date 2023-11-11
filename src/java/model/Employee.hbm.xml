@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 28, 2023 11:27:24 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 11, 2023 12:17:00 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Employee" table="employee" catalog="j2eeb1" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -43,6 +43,12 @@
                 <column name="employee" />
             </key>
             <one-to-many class="model.Login" />
+        </set>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="employee" not-null="true" />
+            </key>
+            <one-to-many class="model.Cart" />
         </set>
     </class>
 </hibernate-mapping>

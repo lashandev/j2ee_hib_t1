@@ -24,5 +24,19 @@
             }
         });
     });
+    function addToCart(id) {
+        $.ajax({
+            type: 'POST',
+            url: "AddToCart",
+            data: {"item": id},
+            success: function (data) {
+                window.location = "Home.jsp";
+
+            },
+            error: function () {
+
+            }
+        });
+    }
 </script>
 

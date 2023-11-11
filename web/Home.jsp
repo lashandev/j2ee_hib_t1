@@ -4,6 +4,8 @@
     Author     : Lashan
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="dto.SessionCart"%>
 <%@page import="dto.UserData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,6 +74,17 @@
                     <!-- Icon -->
                     <a class="text-reset me-3" href="#">
                         <i class="fas fa-shopping-cart"></i>
+                            <%
+                                if(session.getAttribute("cart") != null){
+                                SessionCart cart = (SessionCart) session.getAttribute("cart");
+                                if (cart.getItemList()!= null && cart.getItemList().size()>0) {
+                                        %>
+                                        <span class="badge rounded-pill badge-notification bg-danger"><%= cart.getItemList().size() %></span>
+                                        
+                                        <%
+                                    }
+                                }
+                            %>
                     </a>
 
                     <!-- Notifications -->
@@ -85,7 +98,7 @@
                             aria-expanded="false"
                             >
                             <i class="fas fa-bell"></i>
-                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                            <!--<span class="badge rounded-pill badge-notification bg-danger">1</span>-->
                         </a>
                         <ul
                             class="dropdown-menu dropdown-menu-end"
@@ -154,6 +167,16 @@
             </div>
             <!-- Container wrapper -->
         </nav>
+                
+                <div class="card">
+                    <div class="card-header text-center">
+                        Item Cart
+                    </div>
+                    <div class="card-body">
+                         <%@include file="ItemViewer.jsp" %>
+                    </div>
+                    
+                </div>
 
 
     </body>

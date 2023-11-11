@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 28, 2023 11:27:24 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 11, 2023 12:17:00 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Status" table="status" catalog="j2eeb1" optimistic-lock="version">
         <id name="code" type="string">

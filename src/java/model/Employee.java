@@ -1,5 +1,5 @@
 package model;
-// Generated Oct 28, 2023 11:27:24 AM by Hibernate Tools 4.3.1
+// Generated Nov 11, 2023 12:17:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -38,11 +38,12 @@ public class Employee  implements java.io.Serializable {
      private String lastupdateuser;
      private Date lastupdatedatetime;
      private Set<Login> logins = new HashSet<Login>(0);
+     private Set<Cart> carts = new HashSet<Cart>(0);
 
     public Employee() {
     }
 
-    public Employee(String employeeno, String firstname, String lastname, String mobileno, String email, Double salary, String createduser, Date createddatetime, String lastupdateuser, Date lastupdatedatetime, Set<Login> logins) {
+    public Employee(String employeeno, String firstname, String lastname, String mobileno, String email, Double salary, String createduser, Date createddatetime, String lastupdateuser, Date lastupdatedatetime, Set<Login> logins, Set<Cart> carts) {
        this.employeeno = employeeno;
        this.firstname = firstname;
        this.lastname = lastname;
@@ -54,6 +55,7 @@ public class Employee  implements java.io.Serializable {
        this.lastupdateuser = lastupdateuser;
        this.lastupdatedatetime = lastupdatedatetime;
        this.logins = logins;
+       this.carts = carts;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -175,6 +177,15 @@ public class Employee  implements java.io.Serializable {
     
     public void setLogins(Set<Login> logins) {
         this.logins = logins;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
+    public Set<Cart> getCarts() {
+        return this.carts;
+    }
+    
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 
 

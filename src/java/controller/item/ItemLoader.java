@@ -45,12 +45,18 @@ public class ItemLoader extends HttpServlet {
             String content = "<section style=\"background-color: #eee;\">\n"
                     + "            <div class=\"text-center container py-5\">";
 
+            int rows = 0;
+
             for (Item item : searchActiveItems) {
+                ++rows;
                 String path = item.getImgurl().replace("\\", "/");
                 byte[] fileContent = FileUtils.readFileToByteArray(new File(path));
                 String encodedString = Base64.getEncoder().encodeToString(fileContent);
-                String imageBase64 = "data:image/jpeg;base64,"+encodedString;
-                content += "<div class=\"col-lg-4 col-md-12 mb-4\">\n"
+                String imageBase64 = "data:image/jpeg;base64," + encodedString;
+                if (rows % 3 == 1) {
+                    content += "<div class=\"row\">\n";
+                }
+                content += "<div class=\"col-sm-4\">\n"
                         + "                        <div class=\"card\">\n"
                         + "                            <div class=\"bg-image hover-zoom ripple ripple-surface ripple-surface-light\"\n"
                         + "                                 data-mdb-ripple-color=\"light\">\n"
@@ -68,19 +74,21 @@ public class ItemLoader extends HttpServlet {
                         + "                                </a>\n"
                         + "                            </div>\n"
                         + "                            <div class=\"card-body\">\n"
-                        + "                                <a href=\"\" class=\"text-reset\">\n"
                         + "                                    <h5 class=\"card-title mb-3\">" + item.getName() + "</h5>\n"
-                        + "                                </a>\n"
-                        + "                                <a href=\"\" class=\"text-reset\">\n"
-                        + "                                    <p>Category</p>\n"
-                        + "                                </a>\n"
-                        + "                                <a href=\"\" class=\"text-reset\">\n"
-                        + "                                    <p>" + item.getId() + "</p>\n"
-                        + "                                </a>\n"
-                        + "                                <h6 class=\"mb-3\">$61.99</h6>\n"
+                        + "                                <a href=\"AddToCart?item="+item.getId()+"\" class=\"text-reset\"><button class=\"btn btn-danger\">\n"
+                        + "                                    Add to Cart\n"
+                        + "                                </button></a>\n"
+                        + "                                <h6 class=\"mb-3\">LKR " + item.getPrice() + "</h6>\n"
                         + "                            </div>\n"
                         + "                        </div>\n"
                         + "                    </div>";
+                if (rows % 3 == 0) {
+                    content += "</div>\n";
+                }
+            }
+
+            if (rows % 3 == 1 || rows % 3 == 2) {
+                content += "</div>\n";
             }
 
             content += "</div>\n"

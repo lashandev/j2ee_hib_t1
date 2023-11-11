@@ -1,10 +1,14 @@
 package model;
-// Generated Oct 28, 2023 11:27:24 AM by Hibernate Tools 4.3.1
+// Generated Nov 11, 2023 12:17:00 PM by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +25,9 @@ public class Item  implements java.io.Serializable {
      private String name;
      private String imgurl;
      private Boolean isactive;
-     private int sortkey;
+     private Integer sortkey;
+     private Double price;
+     private Set<Cartitem> cartitems = new HashSet<Cartitem>(0);
 
     public Item() {
     }
@@ -30,11 +36,14 @@ public class Item  implements java.io.Serializable {
     public Item(String id) {
         this.id = id;
     }
-    public Item(String id, String name, String imgurl, Boolean isactive) {
+    public Item(String id, String name, String imgurl, Boolean isactive, Integer sortkey, Double price, Set<Cartitem> cartitems) {
        this.id = id;
        this.name = name;
        this.imgurl = imgurl;
        this.isactive = isactive;
+       this.sortkey = sortkey;
+       this.price = price;
+       this.cartitems = cartitems;
     }
    
      @Id 
@@ -79,13 +88,33 @@ public class Item  implements java.io.Serializable {
         this.isactive = isactive;
     }
 
+    
     @Column(name="sortkey")
-    public int getSortkey() {
-        return sortkey;
+    public Integer getSortkey() {
+        return this.sortkey;
+    }
+    
+    public void setSortkey(Integer sortkey) {
+        this.sortkey = sortkey;
     }
 
-    public void setSortkey(int sortkey) {
-        this.sortkey = sortkey;
+    
+    @Column(name="price", precision=22, scale=0)
+    public Double getPrice() {
+        return this.price;
+    }
+    
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="item")
+    public Set<Cartitem> getCartitems() {
+        return this.cartitems;
+    }
+    
+    public void setCartitems(Set<Cartitem> cartitems) {
+        this.cartitems = cartitems;
     }
 
 

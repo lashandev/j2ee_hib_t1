@@ -49,4 +49,11 @@ public class ItemDAO {
         return list;
     }
     
+    public Item search(String id) {
+        Session session = ConnectionBuilder.hibSession();
+        Criteria criteria = session.createCriteria(Item.class);
+        criteria.add(Restrictions.eq("id", id));        
+        return (Item) criteria.uniqueResult();
+    }
+    
 }

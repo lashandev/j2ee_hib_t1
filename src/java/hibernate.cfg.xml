@@ -47,6 +47,9 @@ Contributor(s):
     <property name="hibernate.connection.password">Password@123</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <mapping resource="model/Login.hbm.xml"/>
+    <mapping resource="model/Cart.hbm.xml"/>
+    <mapping resource="model/Cartitem.hbm.xml"/>
+    <mapping resource="model/Cartstatus.hbm.xml"/>
     <mapping resource="model/Department.hbm.xml"/>
     <mapping resource="model/Status.hbm.xml"/>
     <mapping resource="model/Employee.hbm.xml"/>
