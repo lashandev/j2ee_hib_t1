@@ -6,9 +6,11 @@
 package dao;
 
 import connection.ConnectionBuilder;
+import java.util.List;
 import model.Employee;
 import model.Login;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -54,6 +56,19 @@ public class UserDAO {
         Login login = (Login) cr.uniqueResult();
         
         return login;
+    }
+    
+    public Employee getEmployeeByUsername(String username){
+        
+        
+        Session session = ConnectionBuilder.hibSession();
+        String hql = "SELECT u.employee FROM Login u WHERE u.username=:a";
+        Query query = session.createQuery(hql);
+        query.setParameter("a", username);
+        
+        List list = query.list();
+        Employee employee = (Employee)list.get(0);
+        return employee;
     }
     
 }

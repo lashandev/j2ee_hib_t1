@@ -40,8 +40,14 @@ public class ItemLoader extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String fr = request.getParameter("fr");
+            int first_result = 0;
+            if (fr != null && !fr.trim().equals("")) {
+                first_result = Integer.parseInt(fr);
+                first_result *= 6;
+            }
             ItemDAO itemDAO = new ItemDAO();
-            List<Item> searchActiveItems = itemDAO.searchActiveItems();
+            List<Item> searchActiveItems = itemDAO.searchActiveItems(first_result);
             String content = "<section style=\"background-color: #eee;\">\n"
                     + "            <div class=\"text-center container py-5\">";
 
@@ -75,7 +81,7 @@ public class ItemLoader extends HttpServlet {
                         + "                            </div>\n"
                         + "                            <div class=\"card-body\">\n"
                         + "                                    <h5 class=\"card-title mb-3\">" + item.getName() + "</h5>\n"
-                        + "                                <a href=\"AddToCart?item="+item.getId()+"\" class=\"text-reset\"><button class=\"btn btn-danger\">\n"
+                        + "                                <a href=\"AddToCart?item=" + item.getId() + "\" class=\"text-reset\"><button class=\"btn btn-danger\">\n"
                         + "                                    Add to Cart\n"
                         + "                                </button></a>\n"
                         + "                                <h6 class=\"mb-3\">LKR " + item.getPrice() + "</h6>\n"

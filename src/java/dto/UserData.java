@@ -16,6 +16,7 @@ import lombok.Data;
 public class UserData {
     
     private String username;
+    private int employeeID;
     private String fname;
     private String lname;
     

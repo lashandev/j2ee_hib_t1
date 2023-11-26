@@ -4,6 +4,8 @@
     Author     : Lashan
 --%>
 
+<%@page import="dto.UserData"%>
+<%@page import="dao.CartDao"%>
 <%@page import="dto.SessionCartItem"%>
 <%@page import="dto.SessionCart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -39,11 +41,23 @@
                             </div>
 
                             <%
+
+                                SessionCart sescart = null;
                                 double total = 0;
-                                if (session.getAttribute("cart") != null) {
-                                    SessionCart sescart = (SessionCart) session.getAttribute("cart");
-                                    if (sescart.getItemList() != null) {
-                                        for (SessionCartItem cartItem : sescart.getItemList()) {
+                                if (session.getAttribute("userdata") != null) {
+                                    UserData userdata = (UserData) session.getAttribute("userdata");
+
+                                    CartDao cartDao = new CartDao();
+                                    sescart = cartDao.getCart(userdata.getEmployeeID());
+                                } else {
+                                    if (session.getAttribute("cart") != null) {
+                                        sescart = (SessionCart) session.getAttribute("cart");
+                                    }
+                                }
+                               
+
+                                if (sescart!= null && sescart.getItemList() != null) {
+                                    for (SessionCartItem cartItem : sescart.getItemList()) {
                                         total += cartItem.getTotal();
 
                             %>
@@ -83,8 +97,8 @@
                                 </div>
                             </div>
                             <%                                        }
-                                    }
                                 }
+
 
                             %>
 
@@ -104,7 +118,7 @@
                                     <div class="float-end">
                                         <p class="mb-0 me-5 d-flex align-items-center">
                                             <span class="small text-muted me-2">Order total:</span> <span
-                                                class="lead fw-normal">LKR <%=total %></span>
+                                                class="lead fw-normal">LKR <%=total%></span>
                                         </p>
                                     </div>
 

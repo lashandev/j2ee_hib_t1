@@ -4,6 +4,7 @@
     Author     : Lashan
 --%>
 
+<%@page import="dao.CartDao"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.SessionCart"%>
 <%@page import="dto.UserData"%>
@@ -72,19 +73,29 @@
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
                     <!-- Icon -->
-                    <a class="text-reset me-3" href="#">
+                    <a class="text-reset me-3" href="ShopingCartViver.jsp">
                         <i class="fas fa-shopping-cart"></i>
-                            <%
-                                if(session.getAttribute("cart") != null){
-                                SessionCart cart = (SessionCart) session.getAttribute("cart");
-                                if (cart.getItemList()!= null && cart.getItemList().size()>0) {
-                                        %>
-                                        <span class="badge rounded-pill badge-notification bg-danger"><%= cart.getItemList().size() %></span>
-                                        
-                                        <%
-                                    }
+                        <%
+                            SessionCart sescart = null;
+                            if (session.getAttribute("userdata") != null) {
+                                UserData userdata = (UserData) session.getAttribute("userdata");
+
+                                CartDao cartDao = new CartDao();
+                                sescart = cartDao.getCart(userdata.getEmployeeID());
+                            } else {
+                                if (session.getAttribute("cart") != null) {
+                                    sescart = (SessionCart) session.getAttribute("cart");
                                 }
-                            %>
+                            }
+
+                            if (sescart != null && sescart.getItemList() != null && sescart.getItemList().size() > 0) {
+                        %>
+                        <span class="badge rounded-pill badge-notification bg-danger"><%= sescart.getItemList().size()%></span>
+
+                        <%
+                            }
+
+                        %>
                     </a>
 
                     <!-- Notifications -->
@@ -116,9 +127,8 @@
                         </ul>
                     </div>
                     <!-- Avatar -->
-                    <%
-                        if (request.getSession().getAttribute("userdata") != null) {
-                            UserData userData = (UserData)request.getSession().getAttribute("userdata");
+                    <%                        if (request.getSession().getAttribute("userdata") != null) {
+                            UserData userData = (UserData) request.getSession().getAttribute("userdata");
 
                     %>
                     <div class="dropdown">
@@ -143,7 +153,7 @@
                             aria-labelledby="navbarDropdownMenuAvatar"
                             >
                             <li>
-                                <a class="dropdown-item" href="#"><%= userData.getFname() +" "+userData.getLname() %></a>
+                                <a class="dropdown-item" href="#"><%= userData.getFname() + " " + userData.getLname()%></a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">Settings</a>
@@ -167,16 +177,16 @@
             </div>
             <!-- Container wrapper -->
         </nav>
-                
-                <div class="card">
-                    <div class="card-header text-center">
-                        Item Cart
-                    </div>
-                    <div class="card-body">
-                         <%@include file="ItemViewer.jsp" %>
-                    </div>
-                    
-                </div>
+
+        <div class="card">
+            <div class="card-header text-center">
+                Item Cart
+            </div>
+            <div class="card-body">
+                <%@include file="ItemViewer.jsp" %>
+            </div>
+
+        </div>
 
 
     </body>

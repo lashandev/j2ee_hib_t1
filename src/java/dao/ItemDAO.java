@@ -11,6 +11,7 @@ import model.Item;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -41,12 +42,23 @@ public class ItemDAO {
         return list;
     }
     
-    public List<Item> searchActiveItems() {
+    public List<Item> searchActiveItems(int first) {
+        Session session = ConnectionBuilder.hibSession();
+        Criteria criteria = session.createCriteria(Item.class);
+        criteria.add(Restrictions.eq("isactive", Boolean.TRUE));
+        criteria.addOrder(Order.asc("sortkey"));
+        criteria.setFirstResult(first);
+        criteria.setMaxResults(6);
+        List<Item> list = criteria.list();
+        return list;
+    }
+    
+    public int searchActiveCount() {
         Session session = ConnectionBuilder.hibSession();
         Criteria criteria = session.createCriteria(Item.class);
         criteria.add(Restrictions.eq("isactive", Boolean.TRUE));
         List<Item> list = criteria.list();
-        return list;
+        return list.size();
     }
     
     public Item search(String id) {

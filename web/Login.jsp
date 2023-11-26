@@ -29,13 +29,13 @@
                         <form>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="forUsername" class="form-control" />
+                                <input type="text" id="forUsername" class="form-control" value="admin" />
                                 <label class="form-label" for="forUsername">Username</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="forPassword" class="form-control" />
+                                <input type="password" id="forPassword" class="form-control" value="123" />
                                 <label class="form-label" for="forPassword">Password</label>
                             </div>
 

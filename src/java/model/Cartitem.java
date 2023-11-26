@@ -28,6 +28,7 @@ public class Cartitem  implements java.io.Serializable {
      private Integer qty;
      private Double unitprice;
      private Double total;
+     private String image;
 
     public Cartitem() {
     }
@@ -105,6 +106,14 @@ public class Cartitem  implements java.io.Serializable {
     
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

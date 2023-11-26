@@ -42,6 +42,10 @@ public class Employee  implements java.io.Serializable {
 
     public Employee() {
     }
+    
+    public Employee(Integer id) {
+        this.id = id;
+    }
 
     public Employee(String employeeno, String firstname, String lastname, String mobileno, String email, Double salary, String createduser, Date createddatetime, String lastupdateuser, Date lastupdatedatetime, Set<Login> logins, Set<Cart> carts) {
        this.employeeno = employeeno;
